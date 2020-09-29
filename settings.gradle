@@ -1,0 +1,3 @@
+include ':app'
+include ':stripe'
+rootProject.name = "MStripLib"

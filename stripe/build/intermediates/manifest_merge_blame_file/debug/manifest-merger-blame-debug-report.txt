@@ -1,0 +1,61 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.stripe.android"
+4    android:versionCode="109"
+5    android:versionName="16.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml
+10
+11    <application>
+11-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:7:5-31:19
+12        <activity
+12-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:8:9-10:57
+13            android:name="com.stripe.android.view.AddPaymentMethodActivity"
+13-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:9:13-58
+14            android:theme="@style/StripeDefaultTheme" />
+14-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:10:13-54
+15        <activity
+15-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:11:9-13:57
+16            android:name="com.stripe.android.view.PaymentMethodsActivity"
+16-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:12:13-56
+17            android:theme="@style/StripeDefaultTheme" />
+17-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:13:13-54
+18        <activity
+18-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:14:9-16:57
+19            android:name="com.stripe.android.view.PaymentFlowActivity"
+19-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:15:13-53
+20            android:theme="@style/StripeDefaultTheme" />
+20-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:16:13-54
+21        <activity
+21-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:17:9-20:58
+22            android:name="com.stripe.android.view.PaymentAuthWebViewActivity"
+22-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:18:13-60
+23            android:theme="@style/StripeDefaultTheme"
+23-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:19:13-54
+24            android:windowSoftInputMode="adjustResize" />
+24-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:20:13-55
+25        <activity
+25-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:21:9-23:57
+26            android:name="com.stripe.android.view.PaymentRelayActivity"
+26-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:22:13-54
+27            android:theme="@style/StripeDefaultTheme" />
+27-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:23:13-54
+28        <activity
+28-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:24:9-26:57
+29            android:name="com.stripe.android.view.Stripe3ds2CompletionActivity"
+29-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:25:13-62
+30            android:theme="@style/StripeDefaultTheme" />
+30-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:26:13-54
+31        <activity
+31-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:28:9-30:65
+32            android:name="com.stripe.android.checkout.CheckoutActivity"
+32-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:29:13-54
+33            android:theme="@style/StripeCheckoutDefaultTheme" />
+33-->/Users/mansourx/Documents/GitHub/mStripe-Android/stripe/AndroidManifest.xml:30:13-62
+34    </application>
+35
+36</manifest>

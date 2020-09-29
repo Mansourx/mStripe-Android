@@ -1,0 +1,142 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'checkstyle'
+
+    id 'maven'
+    id 'signing'
+    id 'maven-publish'
+
+}
+
+assemble.dependsOn('lint')
+check.dependsOn('checkstyle')
+
+configurations {
+    javadocDeps
+    ktlint
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$androidLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$androidLifecycleVersion"
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+
+    // Api for this import because we use reflection to alter TextInputLayout
+    api "com.google.android.material:material:$materialVersion"
+
+    implementation "com.stripe:stripe-3ds2-android:4.1.0"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
+
+    javadocDeps 'androidx.annotation:annotation:1.1.0'
+    javadocDeps 'androidx.appcompat:appcompat:1.2.0'
+    javadocDeps "com.google.android.material:material:$materialVersion"
+
+    testImplementation 'junit:junit:4.13'
+    testImplementation "org.mockito:mockito-core:3.5.11"
+    testImplementation 'org.robolectric:robolectric:4.4'
+    testImplementation "androidx.test:core:$androidTestVersion"
+    testImplementation 'org.json:json:20200518'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion"
+    testImplementation 'com.google.truth:truth:1.0.1'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test:rules:$androidTestVersion"
+    androidTestImplementation "androidx.test:runner:$androidTestVersion"
+    androidTestUtil "androidx.test:orchestrator:$androidTestVersion"
+
+    ktlint "com.pinterest:ktlint:$ktlintVersion"
+
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion rootProject.ext.compileSdkVersion
+        consumerProguardFiles 'proguard-rules.txt'
+
+        vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+        main.kotlin.srcDirs += 'src/main/java'
+        main.java.srcDirs += 'src/main/java'
+
+        test {
+
+        }
+    }
+    testOptions {
+        unitTests {
+            // Note: without this, all Robolectric tests using BuildConfig will fail.
+            includeAndroidResources = true
+        }
+    }
+    productFlavors {
+    }
+
+    lintOptions {
+        enable "Interoperability"
+        lintConfig file("../settings/lint.xml")
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+androidExtensions {
+    features = ['parcelize']
+    experimental = true
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+    // to generate report in checkstyle format prepend following args:
+    // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    // see https://github.com/pinterest/ktlint#usage for more
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
+}
+
+apply from: 'deploy.gradle'
